@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include<conio.h>
 #define SIZE 100
 typedef struct{
 char nome[SIZE];
@@ -74,22 +73,22 @@ void menu(){
         scanf("%d", &op);
         switch(op){
             case 1:
-                system("cls");
+                system("clear");
                 cadastroGeral();
-                system("cls");
+                system("clear");
                 menu();
 
             case 2:
-                system("cls");
+                system("clear");
                 pesquisaGeral();
-                system("cls");
+                system("clear");
                 menu();
 
             case 3:
                 exit(0);
 
             default:
-                system("cls");
+                system("clear");
                 printf("\n\nopcao invalida!\n\n");
 
         }
@@ -114,42 +113,42 @@ void cadastroGeral(){
 
         switch(op){
             case 1:
-                system("cls");
+                system("clear");
                 cadastro_Pizzaiolo();
-                system("cls");
+                system("clear");
                 menu();
 
             case 2:
-                system("cls");
+                system("clear");
                 cadastro_Pizza();
-                system("cls");
+                system("clear");
                 menu();
 
             case 3:
-                system("cls");
+                system("clear");
                 cadastro_Bebida();
-                system("cls");
+                system("clear");
                 menu();
 
             case 4:
-                system("cls");
+                system("clear");
                 cadastro_Cliente();
-                system("cls");
+                system("clear");
                 menu();
 
 
             case 5:
-                system("cls");
+                system("clear");
                 cadastro_Pedido();
-                system("cls");
+                system("clear");
                 menu();
 
             case 6:
-                system("cls");
+                system("clear");
                 menu();
 
                 default:
-                    system("cls");
+                    system("clear");
                     printf("\n\nopcao invalida!\n\n");
 
         }
@@ -166,7 +165,7 @@ void cadastro_Pizzaiolo(){
 
     do{
        fflush(stdin);
-       system("cls");
+       system("clear");
        printf("   CADASTRO DE PIZZAIOLO!\n");
        printf("___________________________________\n");
        printf("\nDigite o Nome: ");
@@ -203,7 +202,7 @@ int pedacos [10];
 
     do{
       fflush(stdin);
-       system("cls");
+       system("clear");
        printf("   CADASTRO DE PIZZA!\n");
        printf("___________________________________\n");
        printf("\nDigite o Nome: ");
@@ -239,7 +238,7 @@ int quantidade[50];
 int preco[50];
     do{
         fflush(stdin);
-        system("cls");
+        system("clear");
         printf("   CADASTRO DE BEBIDAS\n");
         printf("___________________________________\n");
         printf("Tipo da bebida: ");
@@ -277,7 +276,7 @@ char endereco [50];
 
     do{
         fflush(stdin);
-        system("cls");
+        system("clear");
         printf("   CADASTRO DE CLIENTE\n");
         printf("___________________________________\n");
         printf("Nome do Cliente: ");
@@ -313,7 +312,7 @@ char bebida[50];
 char local[20];
 char pagamento[20];
     do{
-        system("cls");
+        system("clear");
         printf("   CADASTRO DE PEDIDO\n");
         printf("___________________________________\n");
         printf("Nome do Cliente: ");
@@ -356,17 +355,17 @@ void pesquisaGeral(){
         switch(op){
 
         case 1:
-            system("cls");
+            system("clear");
             pesquisa_Pizzaiolo();
-            system("cls");
+            system("clear");
             menu();
 
         case 2:
-            system("cls");
+            system("clear");
 
 
         default:
-            system("cls");
+            system("clear");
             printf("\n\nopcao invalida!\n\n");
         }
     }while(op!=6);
@@ -378,13 +377,13 @@ char nomePesquisa[50];
 int cpfPesquisa;
 int i;
     do{
-     system("cls");
+     system("clear");
      printf("\nDigite 1 para pesquisar por NOME ou 2 para pesquisar por CPF: ");
 
      scanf("%d", &op);
          switch(op){
             case 1:
-                system("cls");
+                system("clear");
                 printf("   PESQUISA DE PIZZAIOLO\n");
                 printf("___________________________________\n");
                 printf("\nDigite o Nome: ");
@@ -411,7 +410,7 @@ int i;
                 break;
 
             default:
-                system("cls");
+                system("clear");
                 printf("\n\nopcao invalida!\n\n");
 
 
