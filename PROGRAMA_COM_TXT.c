@@ -1,5 +1,8 @@
 #include <stdio.h>
-#define SIZE 100
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#define SIZE 200
 typedef struct{
 char nome[SIZE];
 char cpf[SIZE];
@@ -12,35 +15,33 @@ char sabor[SIZE];
 char pedaco[SIZE];
 } pizza;
 
-typedef struct{
-char nome[SIZE];
-char tipo[SIZE];
-char quantidade[SIZE];
-char preco[SIZE];
-} bebida;
-
-typedef struct{
-char nome[SIZE];
-char telefone[SIZE];
-char endereco[SIZE];
-} cliente;
-
 
 pizzaiolo p[SIZE];
 pizza pp[SIZE];
-bebida b[SIZE];
-cliente c[SIZE];
 
 
-//void
-    char nome[SIZE];
-char cpf[SIZE];
-char telefone[SIZE];
+char nome[100];
+char nomePizza[SIZE][100];
+int cpf[SIZE];
+int telefone[SIZE];
 
-int i;
+
 int op;
+
+char pizzasolicitada[50];
+char bebida[50];
+char local[20];
+char pagamento[20];
+char sabor [50];
+int pedacos [1];
+char tipo [50];
+int quantidade[50];
+int preco[50];
+char endereco [50];
+int f;
+int numero_Pizza[3];
 static int linha;
-FILE *arquivo;
+
 
 void menu();
 void cadastroGeral();
@@ -51,6 +52,11 @@ void pesquisaGeral();
 void cadastro_Bebida();
 void cadastro_Cliente();
 void cadastro_Pedido();
+
+void pequisa_Pizza();
+/*void pesquisa_Bebida();
+void pesquisa_Cliente();
+void pesquisa_Pedido();*/
 
 
 int main(void) {
@@ -73,22 +79,22 @@ void menu(){
         scanf("%d", &op);
         switch(op){
             case 1:
-                system("clear");
+                system("cls");
                 cadastroGeral();
-                system("clear");
+                system("cls");
                 menu();
 
             case 2:
-                system("clear");
+                system("cls");
                 pesquisaGeral();
-                system("clear");
+                system("cls");
                 menu();
 
             case 3:
                 exit(0);
 
             default:
-                system("clear");
+                system("cls");
                 printf("\n\nopcao invalida!\n\n");
 
         }
@@ -113,42 +119,42 @@ void cadastroGeral(){
 
         switch(op){
             case 1:
-                system("clear");
+                system("cls");
                 cadastro_Pizzaiolo();
-                system("clear");
+                system("cls");
                 menu();
 
             case 2:
-                system("clear");
+                system("cls");
                 cadastro_Pizza();
-                system("clear");
+                system("cls");
                 menu();
 
             case 3:
-                system("clear");
+                system("cls");
                 cadastro_Bebida();
-                system("clear");
+                system("cls");
                 menu();
 
             case 4:
-                system("clear");
+                system("cls");
                 cadastro_Cliente();
-                system("clear");
+                system("cls");
                 menu();
 
 
             case 5:
-                system("clear");
+                system("cls");
                 cadastro_Pedido();
-                system("clear");
+                system("cls");
                 menu();
 
             case 6:
-                system("clear");
+                system("cls");
                 menu();
 
                 default:
-                    system("clear");
+                    system("cls");
                     printf("\n\nopcao invalida!\n\n");
 
         }
@@ -160,95 +166,62 @@ void cadastroGeral(){
 
 
 void cadastro_Pizzaiolo(){
-        static int linha=0;
-
-
+    static int linha;
     do{
-       fflush(stdin);
-       system("clear");
+       system("cls");
        printf("   CADASTRO DE PIZZAIOLO!\n");
        printf("___________________________________\n");
        printf("\nDigite o Nome: ");
-       gets(p[linha].nome);
+       scanf("%s", &nome[linha]);
        printf("Digite o CPF: ");
-       gets(p[linha].cpf);
+       scanf("%d", &cpf[linha]);
        printf("Digite o Telefone: ");
-       gets(p[linha].telefone);
+       scanf("%d", &telefone[linha]);
        printf("\nCadastro efetuado :)!\n");
        printf("Digite 1 para cadastrar outro, ou 0 para voltar ao menu: ");
        scanf("%d", &op);
        linha++;
 
     }while(op==1);
-
-    arquivo=fopen("pizzaiolo.txt", "a");
-
-    if(arquivo==NULL){
-        arquivo=fopen("pizzaiolo.txt", "w");
-    }
-
-    for(i=0;i<=linha;i++){
-
-        fwrite(&p, sizeof(p),1, arquivo);
-    }
-    fclose(arquivo);
 }
 // FIM DO CADASTRO PIZZAIOLO
 
 void cadastro_Pizza(){
-static int linha;
-char sabor [50];
-int pedacos [10];
-
     do{
-      fflush(stdin);
-       system("clear");
+       system("cls");
        printf("   CADASTRO DE PIZZA!\n");
        printf("___________________________________\n");
-       printf("\nDigite o Nome: ");
-       gets(pp[linha].nome);
-       printf("\nDigite o Ingredientes: ");
-       gets(pp[linha].sabor);
-       printf("\nDigite quantos pedacos: ");
-       gets(pp[linha].pedaco);
+       printf("Digite o Nome: ");
+       scanf("%s", nome);
+       printf("Numero da pizza: ");
+       scanf("%d", numero_Pizza);
+       printf("Digite o Ingredientes: ");
+       scanf("%s", sabor);
+       printf("Digite quantos pedacos: ");
+       scanf("%d", pedacos);
        printf("\nCadastro efetuado :)!\n");
        printf("Digite 1 para cadastrar outro, ou 0 para voltar ao menu: ");
        scanf("%d", &op);
        linha++;
 
     }while(op==1);
-
-    arquivo=fopen("pizza.txt", "a");
-
-    if(arquivo==NULL){
-        arquivo=fopen("pizza.txt", "w");
-    }
-
-    for(i=0;i<=linha;i++){
-
-        fwrite(&p, sizeof(p),1, arquivo);
-    }
-    fclose(arquivo);
+   // system("pause");
 }
 //FIM CADASTRO DE PIZZAS
 
 void cadastro_Bebida(){
-char tipo [50];
-int quantidade[50];
-int preco[50];
     do{
-        fflush(stdin);
-        system("clear");
+        system("cls");
         printf("   CADASTRO DE BEBIDAS\n");
         printf("___________________________________\n");
         printf("Tipo da bebida: ");
-        gets(b[linha].tipo);
+        scanf("%s", &tipo);
         printf("Nome da Bebida: ");
-        gets(b[linha].nome);
+        scanf("%s", &nome);
         printf("Quantidade da Bebida: ");
-         gets(b[linha].quantidade);
+        scanf("%d", &quantidade);
         printf("Preco da bebida: ");
-        gets(b[linha].preco);
+        scanf("%d", &preco);
         printf("\nCadastro efetuado! :)");
         printf("\nDigite 1 para cadastrar outro, ou 0 para voltar ao menu: ");
         scanf("%d", &op);
@@ -256,66 +229,43 @@ int preco[50];
 
 
     }while(op==1);
-
-     arquivo=fopen("bebida.txt", "a");
-
-    if(arquivo==NULL){
-        arquivo=fopen("bebida.txt", "w");
-    }
-
-    for(i=0;i<=linha;i++){
-
-        fwrite(&p, sizeof(p),1, arquivo);
-    }
-    fclose(arquivo);
 }
 //FIM CADASTRO DE BEBIDAS
 
 void cadastro_Cliente(){
-char endereco [50];
-
     do{
-        fflush(stdin);
-        system("clear");
+        system("cls");
         printf("   CADASTRO DE CLIENTE\n");
         printf("___________________________________\n");
         printf("Nome do Cliente: ");
-        gets(c[linha].nome);
+        scanf("%s", &nome);
         printf("\nTelefone do Cliente: ");
-        gets(c[linha].telefone);
+        scanf("%d", &telefone);
         printf("\nEndereco do Cliente: ");
-        gets(c[linha].endereco);
+        gets(endereco);
+        fflush(stdin);
         printf("______________________________________________________________\n");
         printf("\n\nCadastro efetuado! :)");
         printf("\nDigite 1 para cadastrar outro, ou 0 para voltar ao menu: ");
         scanf("%d", &op);
 
     }while(op==1);
-
-     arquivo=fopen("cliente.txt", "a");
-
-    if(arquivo==NULL){
-        arquivo=fopen("cliente.txt", "w");
-    }
-
-    for(i=0;i<=linha;i++){
-
-        fwrite(&p, sizeof(p),1, arquivo);
-    }
-    fclose(arquivo);
 }
 //FIM DO CADASTRO DO CLIENTE
 
 void cadastro_Pedido(){
-char pizzasolicitada[50];
-char bebida[50];
-char local[20];
-char pagamento[20];
+srand(time(NULL));
+
+    for(f=1 ; f <= 1 ; f++){
+        printf("%d", rand() % 10000);
+    }
+
     do{
-        system("clear");
+        system("cls");
         printf("   CADASTRO DE PEDIDO\n");
         printf("___________________________________\n");
-        printf("Nome do Cliente: ");
+        printf("Numero do pedido: %d", rand() % 10000);
+        printf("\n\nNome do Cliente: ");
         scanf("%s", &nome);
         printf("\nPizza solicitada: ");
         scanf("%s", &pizzasolicitada);
@@ -355,17 +305,20 @@ void pesquisaGeral(){
         switch(op){
 
         case 1:
-            system("clear");
+            system("cls");
             pesquisa_Pizzaiolo();
-            system("clear");
+            system("cls");
             menu();
 
         case 2:
-            system("clear");
+            system("cls");
+            pesquisa_Pizza();
+            system("cls");
+            menu();
 
 
         default:
-            system("clear");
+            system("cls");
             printf("\n\nopcao invalida!\n\n");
         }
     }while(op!=6);
@@ -377,25 +330,25 @@ char nomePesquisa[50];
 int cpfPesquisa;
 int i;
     do{
-     system("clear");
-     printf("\nDigite 1 para pesquisar por NOME ou 2 para pesquisar por CPF: ");
+        system("cls");
+        printf("   PESQUISA DE PIZZAIOLO\n");
+        printf("___________________________________\n");
+        printf("\nDigite 1 para pesquisar por NOME ou 2 para pesquisar por CPF: ");
+        scanf("%d", &op);
 
-     scanf("%d", &op);
          switch(op){
             case 1:
-                system("clear");
+                system("cls");
                 printf("   PESQUISA DE PIZZAIOLO\n");
                 printf("___________________________________\n");
                 printf("\nDigite o Nome: ");
                 scanf("%s", &nomePesquisa);
                 for(i=0;i<SIZE;i++){
-                    if(strcmp(p[i].nome, nomePesquisa)==0){
-                        arquivo=fopen("pizzaiolo.txt", "r");
-                        printf("\nNome: %s\nCPF: %s\nTelefone: %s", p[i].nome, p[i].cpf, p[i].telefone);
+                    if(strcmp(nome[i], nomePesquisa)==0){
+                        printf("\nNome: %s\nCPF: %d\nTelefone: %d", nome[i], cpf[i], telefone[i]);
+                        printf("\n---------------------------------------------------------\n");
                     }
-
                 }
-                    fclose(arquivo);
                 break;
             case 2:
                 printf("   PESQUISA DE PIZZAIOLO\n");
@@ -404,13 +357,13 @@ int i;
                 scanf("%d", &cpfPesquisa);
                 for(i=0;i<SIZE;i++){
                     if(cpf[i]==cpfPesquisa){
-                        printf("\nNome: %s\nCPF: %s\nTelefone: %s", p[i].nome, p[i].cpf, p[i].telefone);
+                        printf("\nNome: %s\nCPF: %d\nTelefone: %d", nome[i], cpf[i], telefone[i]);
                     }
                 }
                 break;
 
             default:
-                system("clear");
+                system("cls");
                 printf("\n\nopcao invalida!\n\n");
 
 
@@ -421,5 +374,37 @@ int i;
 }
 //FIM DA PESQUISA PIZZAIOLO
 
-//*/
+void pesquisa_Pizza(){
+char nomePizzaPesquisa[50];
+int i;
 
+    do{
+        printf("   PESQUISA DE PIZZA\n");
+        printf("___________________________________\n");
+        printf("\n Digite 1 para pesquisar por NOME ou 2 para pesquisar por numero: ");
+        scanf("%d", &op);
+        switch(op){
+            case 1:
+               printf("\nDigite o nome da pizza: ");
+               scanf("%s", &nomePizzaPesquisa);
+               for(i=0;i<SIZE;i++){
+                if(strcmp(nome[i], nomePizzaPesquisa)==0){
+                    printf("\nNome da pizza: %s\nNumero da pizza: %d\nIngredientes da pizza: %s\nPedacos da pizza: %d\n", nome[i], numero_Pizza[i], sabor[i], pedacos[i]);
+                    printf("\n---------------------------------------------------------\n");
+                }
+               }
+
+               break;
+
+            case 2:
+
+                break;
+
+            default:
+
+                break;
+        }
+
+    }while(op==1);
+
+}
